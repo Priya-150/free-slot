@@ -3,13 +3,14 @@ function loginWithGoogle() {
   const provider = new firebase.auth.GoogleAuthProvider();
   auth.signInWithPopup(provider)
     .then(() => window.location.href = "dashboard.html")
-    .catch(alert);
+    .catch(err => alert(err.message));
 }
 
-// Login with Email/Password (signup fallback)
+// Login with Email
 function loginWithEmail() {
   const email = prompt("Enter your email:");
   const password = prompt("Enter your password:");
+
   auth.signInWithEmailAndPassword(email, password)
     .then(() => window.location.href = "dashboard.html")
     .catch(error => {
@@ -22,18 +23,16 @@ function loginWithEmail() {
     });
 }
 
-// Check if user is logged in on dashboard
-window.addEventListener("load", () => {
-  if (window.location.pathname.includes("dashboard.html")) {
-    auth.onAuthStateChanged(user => {
-      if (!user) {
-        window.location.href = "index.html";
-      } else {
-        setupDashboard();
-      }
-    });
-  }
-});
+// Auth check
+if (window.location.pathname.includes("dashboard.html")) {
+  auth.onAuthStateChanged(user => {
+    if (!user) {
+      window.location.href = "index.html";
+    } else {
+      setupDashboard();
+    }
+  });
+}
 
 function setupDashboard() {
   const slotStatusContainer = document.getElementById("slotStatusContainer");
@@ -42,21 +41,20 @@ function setupDashboard() {
 
   const slotsRef = database.ref("slots");
   slotsRef.on("value", snapshot => {
-    slotStatusContainer.innerHTML = "";
-    let freeSlots = 0;
     const slots = snapshot.val();
+    slotStatusContainer.innerHTML = "";
+    let free = 0;
     for (let slot in slots) {
       const div = document.createElement("div");
       div.className = "slot " + slots[slot];
       div.textContent = Slot ${slot}: ${slots[slot]};
       slotStatusContainer.appendChild(div);
-      if (slots[slot] === "empty") freeSlots++;
+      if (slots[slot] === "empty") free++;
     }
-    freeSlotCount.textContent = freeSlots;
+    freeSlotCount.textContent = free;
   });
 
-  const logsRef = database.ref("logs");
-  logsRef.on("child_added", snapshot => {
+  database.ref("logs").on("child_added", snapshot => {
     const log = snapshot.val();
     const li = document.createElement("li");
     li.textContent = ${log.type.toUpperCase()} - ${new Date(log.timestamp).toLocaleString()};
@@ -66,18 +64,15 @@ function setupDashboard() {
   document.getElementById("entryBtn").onclick = () => logGate("entry");
   document.getElementById("exitBtn").onclick = () => logGate("exit");
 
-  // ✅ Logout
   document.getElementById("logoutBtn").onclick = () => {
-    auth.signOut().then(() => {
-      window.location.href = "index.html";
-    });
+    auth.signOut().then(() => window.location.href = "index.html");
   };
 }
 
 function logGate(type) {
-  const logRef = database.ref("logs").push();
-  logRef.set({
-    type,
+  const logData = {
+    type: type,
     timestamp: new Date().toISOString()
-  });
+  };
+  database.ref("logs").push(logData);
 }
