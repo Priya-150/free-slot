@@ -1,7 +1,3 @@
-// firebase.js
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-import { getDatabase, ref, onValue, set, push } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
-
 const firebaseConfig = {
   apiKey: "AIzaSyBBWQ9QSs0eLQql_j1WOEcdVteIjpaJil4",
   authDomain: "smart-car-parking-37358.firebaseapp.com",
@@ -12,7 +8,8 @@ const firebaseConfig = {
   measurementId: "G-DVJHJ0HRBB"
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
 
-export { db, ref, onValue, set, push };
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+const database = firebase.database();
