@@ -1,7 +1,7 @@
 body {
-  font-family: sans-serif;
-  background: #f4f4f4;
-  text-align: center;
+  font-family: Arial, sans-serif;
+  background: #f0f2f5;
+  margin: 0;
   padding: 20px;
 }
 
@@ -9,28 +9,29 @@ body {
   max-width: 600px;
   margin: auto;
   background: white;
-  padding: 20px;
-  border-radius: 12px;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 button {
   padding: 10px 20px;
   margin: 10px;
-  border-radius: 8px;
+  font-size: 16px;
   border: none;
-  background: #007BFF;
+  border-radius: 8px;
+  background-color: #007BFF;
   color: white;
   cursor: pointer;
 }
 
 button:hover {
-  background: #0056b3;
+  background-color: #0056b3;
 }
 
 #logoutBtn {
   background-color: #dc3545;
-  float: right;
 }
 
 #logoutBtn:hover {
@@ -40,15 +41,14 @@ button:hover {
 .slot {
   padding: 10px;
   margin: 5px;
-  border-radius: 10px;
+  border-radius: 6px;
   color: white;
-  font-weight: bold;
 }
 
 .slot.empty {
-  background-color: green;
+  background: green;
 }
 
 .slot.occupied {
-  background-color: red;
+  background: red;
 }
