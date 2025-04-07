@@ -1,17 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Parking Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Smart Parking Dashboard</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Parking Slot Dashboard</h1>
-  <div id="slotStatusContainer"></div>
-  <h2>Free Slots: <span id="freeCount">0</span></h2>
+  <div class="container">
+    <h1>Smart Car Parking System</h1>
+    
+    <!-- ✅ Logout Button -->
+    <button id="logoutBtn">Logout</button>
 
-  <script type="module" src="firebase.js"></script>
-  <script type="module" src="script.js"></script>
+    <div id="slotStatusContainer"></div>
+    <h2>Free Slots: <span id="freeSlotCount">0</span></h2>
+
+    <button id="entryBtn">Log Entry</button>
+    <button id="exitBtn">Log Exit</button>
+
+    <h2>Gate Logs</h2>
+    <ul id="logList"></ul>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+  <script src="firebase.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
