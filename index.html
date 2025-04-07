@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gate Entry Log</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Smart Parking Login</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Gate Entry Log System</h1>
-  <button id="entryBtn">Log Entry</button>
-  <button id="exitBtn">Log Exit</button>
-  <h2>Logs:</h2>
-  <div id="logContainer"></div>
+  <div class="container">
+    <h1>Login to Smart Parking</h1>
+    <button onclick="loginWithGoogle()">Continue with Google</button>
+    <button onclick="loginWithEmail()">Continue with Email</button>
+  </div>
 
-  <script type="module" src="firebase.js"></script>
-  <script type="module" src="script.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+  <script src="firebase.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
